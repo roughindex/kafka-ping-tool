@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e
+DEBUG=ping-tool:*,kafka-node:* npm start 2> "${DEBUG_LOG_FILE_PATH}""${DEBUG_LOG_FILE_NAME}"

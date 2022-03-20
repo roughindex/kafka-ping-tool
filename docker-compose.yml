@@ -1,0 +1,18 @@
+version: '3'
+services:
+  kafka-ping-tool:
+    build: ./
+    container_name: kafka-ping-tool
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      PORT: ${PORT}
+      DEBUG: ping-tool:*,kafka-node:*
+    extra_hosts: 
+      - host.docker.internal:host-gateway
+    env_file: .env
+    volumes:
+          - ./logs:${DEBUG_LOG_FILE_PATH}
+    command: "sh -c ./run"
+    # Works on linux only
+    #network: host

@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  div(class='container')
+    div(class='row')
+      div(class='eleven columns')
+        h1=title
+        ul
+          li="URL follows the format of <IP or HOST>:<PORT>"
+          li="CA / CERT / KEY Will accept Base64 encoded strings or plain text."
+    form#kafka_ping_form(
+      action='/pingKafka'
+      method='post'
+    )
+      div(class='row')
+        div(class='eight columns')
+          label(
+            for='kafka_url'
+          ) URL
+          input#kafka_url(
+            type='text'
+            name='kafka_url'
+            size='50'
+            value=kafka_url
+          )
+        div(class='one columns')  
+        div(class='three columns')
+          label(
+            for='kafka_ssl'
+          ) SSL
+          input#kafka_ssl(
+            type='checkbox'
+            name='kafka_ssl'
+            value=kafka_ssl
+            checked=kafka_ssl
+          )
+          label(
+            for='kafka_ca'
+          ) CA
+          textarea#kafka_ca(
+            form='kafka_ping_form'
+            name='kafka_ca'
+            cols="50"
+            rows="500"
+          )=kafka_ca
+          label(
+            for='kafka_cert'
+          ) CERT
+          textarea#kafka_cert(
+            form='kafka_ping_form'
+            name='kafka_cert'
+            cols="50"
+          )=kafka_cert
+          label(
+            for='kafka_key'
+          ) KEY
+          textarea#kafka_key(
+            form='kafka_ping_form'
+            name='kafka_key'
+            cols="50"
+          )=kafka_key
+      div(class='row')
+        div(class='eight columns')
+          input(
+            type='submit'
+            value='Test'
+          )
+    div(class='row')
+      div(class='eleven columns')
+        p=kafka_response
+        pre=logs
